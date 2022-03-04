@@ -31,7 +31,14 @@ public class ColorController implements Initializable {
 
     @FXML
     private Pane paneWindowColor;
-
+    @FXML
+    private Pane paneOne;
+    @FXML
+    private Pane paneTwo;
+    @FXML
+    private Pane paneThree;
+    @FXML
+    private Pane paneFour;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -55,6 +62,7 @@ public class ColorController implements Initializable {
 
         // UPDATE COLOR VIEW
         this.updatePaneWindowColor();
+        this.updatePanesSamples();
     }
 
     /**
@@ -66,6 +74,18 @@ public class ColorController implements Initializable {
                 + this.color.getGreen() + ", "
                 + this.color.getBlue() + ")"
         );
+        this.updatePanesSamples();
+    }
+
+    public void updatePanesSamples() {
+        int paneOneValue = (this.color.getRed() + 50 > 255) ? this.color.getRed() - 50 : this.color.getRed() + 50;
+        int paneTwoValue = (this.color.getGreen() + 50 > 255) ? this.color.getGreen() - 50 : this.color.getGreen() + 50;
+        int paneThreeValue = (this.color.getBlue() + 50 > 255) ? this.color.getBlue() - 50 : this.color.getBlue() + 50;
+
+        this.paneOne.setStyle("-fx-background-color: rgb(" + paneOneValue + ", " + this.color.getGreen() + ", " + this.color.getBlue() + ")");
+        this.paneTwo.setStyle("-fx-background-color: rgb(" + this.color.getRed() + ", " + paneTwoValue + ", " + this.color.getBlue() + ")");
+        this.paneThree.setStyle("-fx-background-color: rgb(" + this.color.getRed() + ", " + this.color.getGreen() + ", " + paneThreeValue + ")");
+        this.paneFour.setStyle("-fx-background-color: rgb(" + paneOneValue + ", " + paneTwoValue + ", " + paneThreeValue + ")");
     }
 
     /**
@@ -90,7 +110,7 @@ public class ColorController implements Initializable {
      */
     public void detectSlideChange(Slider slider, TextField textField) {
         slider.setOnMouseReleased(mouseEvent -> {
-            // Récupération de la valeur rouge
+            // Récupération de la valeur de position du slide
             int colorValue = (int) Math.round(slider.getValue());
             // Mise à jour de la valeur
             useTheRightSetMethod(textField, colorValue);
