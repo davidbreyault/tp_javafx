@@ -56,24 +56,27 @@ public class ColorController implements Initializable {
         this.detectRgbTextFieldChange(this.progressRed, this.textFieldRedValue);
         this.detectRgbTextFieldChange(this.progressGreen, this.textFieldGreenValue);
         this.detectRgbTextFieldChange(this.progressBlue, this.textFieldBlueValue);
+        textFieldRedValue.setOnAction(ActionEvent -> System.out.println("Hello"));
 
         // CHANGE CHAMP INPUT HEXA
         this.detectHexTextFieldChange();
 
-        // UPDATE COLOR VIEW
+        // UPDATE COLORS VIEWS
         this.updatePaneWindowColor();
         this.updatePanesSamples();
     }
 
     /**
-     * Mise à jour de la couleur dans la fenêtre
+     * Mise à jour des couleurs dans les fenêtres
      */
     public void updatePaneWindowColor() {
+        // Fenêtre principale
         this.paneWindowColor.setStyle("-fx-background-color: rgb("
                 + this.color.getRed() + ", "
                 + this.color.getGreen() + ", "
                 + this.color.getBlue() + ")"
         );
+        // Miniatures
         this.updatePanesSamples();
     }
 
@@ -109,7 +112,7 @@ public class ColorController implements Initializable {
      * @param textField Le text field associé à la couleur RGB
      */
     public void detectSlideChange(Slider slider, TextField textField) {
-        slider.setOnMouseReleased(mouseEvent -> {
+        slider.valueProperty().addListener((observable, newValue, oldValue) -> {
             // Récupération de la valeur de position du slide
             int colorValue = (int) Math.round(slider.getValue());
             // Mise à jour de la valeur
@@ -164,7 +167,7 @@ public class ColorController implements Initializable {
      */
     public void detectHexTextFieldChange() {
         textFieldHexValue.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue.length() == 7) {
+            if (newValue.length() >= 7) {
                 try {
                     this.color.setHexValue(newValue);
                     this.updatePaneWindowColor();
