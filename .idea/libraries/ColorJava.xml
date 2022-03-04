@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ColorJava">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../ColorJava/out/artifacts/ColorJava_jar/ColorJava.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
