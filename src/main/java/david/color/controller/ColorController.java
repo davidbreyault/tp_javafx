@@ -38,7 +38,7 @@ public class ColorController implements Initializable {
 
         color = new Color(24, 220, 11);
 
-        this.udateColorValues();
+        this.updateColorValues();
 
         // CHANGE SLIDERS
         this.detectSlideChange(this.progressRed, textFieldRedValue);
@@ -71,7 +71,7 @@ public class ColorController implements Initializable {
     /**
      * Mise à jour de la valeur hexa, des valeurs RGB et des positions des sliders
      */
-    public void udateColorValues() {
+    public void updateColorValues() {
         // SLIDERS
         this.progressRed.setValue(color.getRed());
         this.progressGreen.setValue(color.getGreen());
@@ -148,12 +148,12 @@ public class ColorController implements Initializable {
                 try {
                     this.color.setHexValue(newValue);
                     this.updatePaneWindowColor();
-                    this.udateColorValues();
+                    this.updateColorValues();
                 } catch (IllegalArgumentException e) {
                     System.err.println("Ce n'est pas une bonne valeur hexadécimale.");
                     this.color.setHexValue(oldValue);
                     this.updatePaneWindowColor();
-                    this.udateColorValues();
+                    this.updateColorValues();
                 }
             }
         });
@@ -161,17 +161,17 @@ public class ColorController implements Initializable {
 
     /**
      * Déduction la bonne méthode set à utiliser, par rapport au text field modifié
-     * @param tf
-     * @param rgbValue
+     * @param textField Le text field à observer
+     * @param rgbValue La valeur RGB à passer
      */
-    public void useTheRightSetMethod(TextField tf, int rgbValue) {
-        if (tf.getId().equals("textFieldRedValue")) {
+    public void useTheRightSetMethod(TextField textField, int rgbValue) {
+        if (textField.getId().equals("textFieldRedValue")) {
             this.color.setRed(rgbValue);
         }
-        if (tf.getId().equals("textFieldGreenValue")) {
+        if (textField.getId().equals("textFieldGreenValue")) {
             this.color.setGreen(rgbValue);
         }
-        if (tf.getId().equals("textFieldBlueValue")) {
+        if (textField.getId().equals("textFieldBlueValue")) {
             this.color.setBlue(rgbValue);
         }
     }
